@@ -85,3 +85,11 @@ And after that, you can run the compiled code via the command:
 ```bash
 mvn exec:java -Dexec.mainClass="org.example.App"
 ```
+
+## Maven Utils
+
+Since we are using `maven`, if we want to deploy this application, we will need to generate a package. In maven, we can do that by running a command with the same name as the action. However, best practices mention that before doing that, you must run a clean command, so your final command will look like this:
+
+```bash
+mvn clean package
+```
