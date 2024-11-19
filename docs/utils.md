@@ -1,0 +1,87 @@
+# Utils
+
+If, like me, you are using GitHub Codespaces instead of IntelliJ to interact with Java, but you don't know how or if it is possible to create a project without IntelliJ, brace yourself, my dear Bilbo, we are going on an adventure!
+
+## Preparing extensions
+
+First, you will need to install a bundle of extensions on your IDE, which is called [`Extension Pack for Java`](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack).
+
+## Using the correct SDK
+
+This project was created to run in `java-17`, and the default version of the space is `java-21`. Luckily, Codespaces comes with `sdkman` installed, which will allow us to install and configure the desired SDK version.
+
+To check the installation of sdkman, run the following command:
+
+```bash
+sdk version
+```
+
+After that, you can check all available versions for Java by using the command:
+
+```bash
+sdk list java
+```
+
+Let's install the desired version via the command:
+
+```bash
+sdk install java 17-open
+```
+
+Just like nvm, we can have a "guidance" file in our project to indicate which version should be used. So let's create a file named `.sdkmanrc` which should have the following content:
+
+```bash
+java=17-open
+```
+
+With that created, let's ask sdkman to use the information in that file to set the Java version. You can do that by running the command:
+
+```bash
+sdk env install
+```
+
+That command will check if the version is already downloaded, and if not, it will download the SDK and set it as the default.
+
+## Creating a project
+
+In this project, we are using `maven`. Since maven is installed in this Codespace via that bundle, we can check the installed version by running the command:
+
+```bash
+mvn -v
+```
+
+If this runs and returns the version of maven installed in your space, we can proceed to create a test project (the good old `Hello World`). Run the following command:
+
+```bash
+mvn archetype:generate -DgroupId=org.example -DartifactId=HelloWorldJava -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+```
+
+Yep, it is correct, the values should be that close to the `-D` flag -- I also thought the command wouldn't run.
+
+That will produce the following folder structure:
+
+```bash
+HelloWorldJava/
+├── pom.xml
+└── src/
+    ├── main/
+    │   └── java/
+    │       └── org/example/App.java
+    └── test/
+        └── java/
+            └── org/example/AppTest.java
+```
+
+## Executing the code
+
+To execute the code, you will need to first compile it (remember, we are on the Java side of the moon here). You can do that by running the command:
+
+```bash
+mvn compile
+```
+
+And after that, you can run the compiled code via the command:
+
+```bash
+mvn exec:java -Dexec.mainClass="org.example.App"
+```
