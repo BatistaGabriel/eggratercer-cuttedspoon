@@ -11,7 +11,7 @@ To help you get started and understand the project better, the documentation is 
 ## Features
 
 - Serverless architecture
-- AWS integration (Lambdas, EC2, Api Gateway)
+- AWS integration (Lambdas, S3, Api Gateway)
 - URL shortening capabilities
 
 ## Getting Started
