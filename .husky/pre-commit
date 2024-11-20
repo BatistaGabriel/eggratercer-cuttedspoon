@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
 
-cd LambdaUrlCreator && mvn validate
 npx prettier . --write
 npx secretlint "**/*"
