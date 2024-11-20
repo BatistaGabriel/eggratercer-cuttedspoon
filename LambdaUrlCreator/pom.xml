@@ -17,6 +17,13 @@
     <plugin.prettier.goal>write</plugin.prettier.goal>
   </properties>
 
+  <repositories>
+  <repository>
+    <id>hubspot-repo</id>
+    <url>https://maven.pkg.github.com/hubspot/prettier-java</url>
+  </repository>
+</repositories>
+
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -85,7 +92,7 @@
     <plugin>
       <groupId>com.hubspot.maven.plugins</groupId>
       <artifactId>prettier-maven-plugin</artifactId>
-      <version>0.16</version>
+      <version>0.22</version>
       <configuration>
         <prettierJavaVersion>2.0.0</prettierJavaVersion>
         <printWidth>90</printWidth>
