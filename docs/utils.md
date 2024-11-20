@@ -68,7 +68,7 @@ mvn -v
 If this runs and returns the version of maven installed in your space, we can proceed to create a test project (the good old `Hello World`). Run the following command:
 
 ```bash
-mvn archetype:generate -DgroupId=org.example -DartifactId=HelloWorldJava -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+mvn org.apache.maven.plugins:maven-archetype-plugin:3.1.2:generate -DarchetypeArtifactId="maven-archetype-quickstart" -DarchetypeGroupId="org.apache.maven.archetypes" -DarchetypeVersion="1.0" -DgroupId="<YOUR GROUP ID>" -DartifactId="<YOUR ARTIFACT ID>" -DinteractiveMode=false
 ```
 
 Yep, it is correct, the values should be that close to the `-D` flag -- I also thought the command wouldn't run.
