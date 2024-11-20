@@ -9,6 +9,7 @@ To help you get started and understand the project better, the documentation is 
 - [Setup Guide](docs/setup.md): Instructions on configuring your development environment and setting up commit standards.
 - [SDK/Project Management](docs/utils.md): Instructions on configuring your SDK and creating the project.
 - [Troubleshooting](docs/troubleshooting.md): Some handy content in case you run into any errors.
+- [Deploying](docs/deploy.md): Learn how to generate the `jar` files and upload them to AWS.
 
 ## Features
 
