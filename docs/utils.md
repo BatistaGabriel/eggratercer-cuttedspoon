@@ -42,9 +42,24 @@ sdk env install
 
 That command will check if the version is already downloaded, and if not, it will download the SDK and set it as the default.
 
-## Creating a project
+## Creating a Project
 
-In this project, we are using `maven`. Since maven is installed in this Codespace via that bundle, we can check the installed version by running the command:
+### Via Context Menu
+
+If you want to create the project using a more user-friendly way, you can use the `context menu options` enabled by the extensions bundle you've already installed (Extension Pack for Java). To create a new project, follow these steps:
+
+- Right-click wherever you want and select the option `New Java Project...`
+- In the context menu that appears in the middle of your screen, select `Maven`
+- Select the `archetype` for your project by searching and choosing `maven-archetype-quickstart`
+- Choose the version—here, we will use version `1.0`, which will later appear in your `pom.xml` file as `1.0-SNAPSHOT`
+- Enter the desired name for the `group id`
+- Finally, specify the `artifact id`, which will also be used as the project name
+
+Et voilà! Your Java project is created and ready to break some pipelines out there 😁😁
+
+### Via Command Line
+
+In this project, we are using `maven`. Since Maven is installed in this Codespace via the bundle, we can check the installed version by running the command:
 
 ```bash
 mvn -v
