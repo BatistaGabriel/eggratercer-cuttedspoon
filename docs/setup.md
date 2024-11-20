@@ -8,9 +8,9 @@ First of all, make sure to install editor plugins capable of interacting with th
 
 After installing those plugins, configure your editor by going to the `Settings` page and following these steps:
 
--   Search for `formatter` and set the default formatter to `Prettier`.
--   Search for `format on save` and enable the option to format the file on save.
--   Search for `auto save` and turn this option `off`.
+- Search for `formatter` and set the default formatter to `Prettier`.
+- Search for `format on save` and enable the option to format the file on save.
+- Search for `auto save` and turn this option `off`.
 
 ## Commit Standardization
 

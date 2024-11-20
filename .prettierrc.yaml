@@ -1,11 +1,11 @@
 overrides:
   - files:
-      - '*.java'
+      - "*.java"
     options:
       semi: true
       printWidth: 120
       useTabs: true
       tabWidth: 4
 plugins:
-    - "prettier-plugin-java"
-    - "@prettier/plugin-xml"
+  - "prettier-plugin-java"
+  - "@prettier/plugin-xml"
