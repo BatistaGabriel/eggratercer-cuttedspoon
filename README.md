@@ -6,15 +6,15 @@ A serverless URL shortener built in Java with AWS integration.
 
 To help you get started and understand the project better, the documentation is organized into several sections. Below is a table of contents linking to detailed guides for each topic.
 
-- [Setup Guide](docs/setup.md): Instructions on configuring your development environment and setting up commit standards.
-- [SDK/Project Management](docs/utils.md): Instructions on configuring your SDK and creating the project.
-- [Troubleshooting](docs/troubleshooting.md): Some handy content in case you run into any errors.
+-   [Setup Guide](docs/setup.md): Instructions on configuring your development environment and setting up commit standards.
+-   [SDK/Project Management](docs/utils.md): Instructions on configuring your SDK and creating the project.
+-   [Troubleshooting](docs/troubleshooting.md): Some handy content in case you run into any errors.
 
 ## Features
 
-- Serverless architecture
-- AWS integration (Lambdas, S3, Api Gateway)
-- URL shortening capabilities
+-   Serverless architecture
+-   AWS integration (Lambdas, S3, Api Gateway)
+-   URL shortening capabilities
 
 ## Getting Started
 
