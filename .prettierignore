@@ -4,6 +4,7 @@
 /out/
 /target/
 /node_modules/
+/.husky/
 
 *.log
 
@@ -23,3 +24,9 @@
 *.coverage
 *.lcov
 *.tmp
+
+*ignore
+*rc
+*config
+
+LICENSE
