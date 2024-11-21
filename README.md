@@ -17,6 +17,13 @@ To help you get started and understand the project better, the documentation is 
 - AWS integration (Lambdas, S3, Api Gateway)
 - URL shortening capabilities
 
+## Usage
+
+To interact with the endpoint of this project, you can:
+
+- Use a `[POST]` request on the endpoint with the correct payload to receive your `urlCode`.
+- Use a `[GET]` request on the endpoint, providing the `urlCode` obtained in the previous step.
+
 ## Getting Started
 
 To start using the application, follow the steps in the [Setup Guide](docs/setup.md).
