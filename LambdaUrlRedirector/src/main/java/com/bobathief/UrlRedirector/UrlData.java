@@ -1,4 +1,4 @@
-package com.bobathief.UrlShortener;
+package com.bobathief.UrlRedirector;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
