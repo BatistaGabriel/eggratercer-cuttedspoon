@@ -2,6 +2,8 @@
 
 A serverless URL shortener built in Java with AWS integration.
 
+[![Run tests](https://github.com/BatistaGabriel/eggratercer-cuttedspoon/actions/workflows/tests.yml/badge.svg)](https://github.com/BatistaGabriel/eggratercer-cuttedspoon/actions/workflows/tests.yml) [![Build Artifacts](https://github.com/BatistaGabriel/eggratercer-cuttedspoon/actions/workflows/build-artifacts.yml/badge.svg)](https://github.com/BatistaGabriel/eggratercer-cuttedspoon/actions/workflows/build-artifacts.yml) [![Code Style Check](https://github.com/BatistaGabriel/eggratercer-cuttedspoon/actions/workflows/code-style-check.yml/badge.svg)](https://github.com/BatistaGabriel/eggratercer-cuttedspoon/actions/workflows/code-style-check.yml)
+
 ## Documentation
 
 To help you get started and understand the project better, the documentation is organized into several sections. Below is a table of contents linking to detailed guides for each topic.
