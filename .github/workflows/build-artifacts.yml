@@ -34,12 +34,12 @@ jobs:
       - name: Create LambdaUrlCreator Artifacts
         run: |
           cd LambdaUrlCreator
-          vn clean package
+          mvn clean package
 
       - name: Create LambdaUrlRedirector Artifacts
         run: |
           cd LambdaUrlRedirector
-          vn clean package
+          mvn clean package
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v3
