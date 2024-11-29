@@ -41,6 +41,7 @@ jobs:
         uses: github/codeql-action/init@v2
         with:
           languages: java
+          build-command: mvn clean install
           source-root: LambdaUrlCreator/src
 
       - name: Perform CodeQL Analysis for LambdaUrlCreator
@@ -56,6 +57,7 @@ jobs:
         uses: github/codeql-action/init@v2
         with:
           languages: java
+          build-command: mvn clean install
           source-root: LambdaUrlCreator/src
 
       - name: Perform CodeQL Analysis for LambdaUrlRedirector
