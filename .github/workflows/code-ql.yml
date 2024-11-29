@@ -35,13 +35,13 @@ jobs:
         run: |
           cd LambdaUrlCreator
           mvn clean install
-          ls -al target  # Verifica se o arquivo .jar foi gerado
+          ls -al target
 
       - name: Initialize CodeQL for LambdaUrlCreator
         uses: github/codeql-action/init@v2
         with:
           languages: java
-          target: LambdaUrlCreator
+          source-root: LambdaUrlCreator/src
 
       - name: Perform CodeQL Analysis for LambdaUrlCreator
         uses: github/codeql-action/analyze@v2
@@ -50,13 +50,13 @@ jobs:
         run: |
           cd LambdaUrlRedirector
           mvn clean install
-          ls -al target  # Verifica se o arquivo .jar foi gerado
+          ls -al target
 
       - name: Initialize CodeQL for LambdaUrlRedirector
         uses: github/codeql-action/init@v2
         with:
           languages: java
-          target: LambdaUrlRedirector
+          source-root: LambdaUrlCreator/src
 
       - name: Perform CodeQL Analysis for LambdaUrlRedirector
         uses: github/codeql-action/analyze@v2
