@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -31,20 +31,24 @@ jobs:
             ${{ runner.os }}-maven-
             ${{ runner.os }}-maven-*
 
-      - name: Create LambdaUrlCreator Artifacts
+      - name: Build LambdaUrlCreator Artifacts
         run: |
           cd LambdaUrlCreator
           mvn clean package
 
-      - name: Create LambdaUrlRedirector Artifacts
+      - name: Build LambdaUrlRedirector Artifacts
         run: |
           cd LambdaUrlRedirector
           mvn clean package
 
-      - name: Upload Build Artifact
+      - name: Upload LambdaUrlCreator Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: app-jar
-          path: |
-            LambdaUrlCreator/target/*.jar
-            LambdaUrlRedirector/target/*-shaded.jar
+          name: LambdaUrlCreator-jar
+          path: LambdaUrlCreator/target/*-shaded.jar
+
+      - name: Upload LambdaUrlRedirector Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: LambdaUrlRedirector-jar
+          path: LambdaUrlRedirector/target/*-shaded.jar
