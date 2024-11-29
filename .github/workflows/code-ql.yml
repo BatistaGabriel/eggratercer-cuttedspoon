@@ -31,20 +31,32 @@ jobs:
             ${{ runner.os }}-maven-
             ${{ runner.os }}-maven-*
 
-      - name: Build the project (LambdaUrlCreator)
+      - name: Build LambdaUrlCreator project
         run: |
           cd LambdaUrlCreator
           mvn clean install
+          ls -al target  # Verifica se o arquivo .jar foi gerado
 
-      - name: Build the project (LambdaUrlRedirector)
-        run: |
-          cd LambdaUrlRedirector
-          mvn clean install
-
-      - name: Initialize CodeQL
+      - name: Initialize CodeQL for LambdaUrlCreator
         uses: github/codeql-action/init@v2
         with:
           languages: java
+          target: LambdaUrlCreator
 
-      - name: Perform CodeQL Analysis
+      - name: Perform CodeQL Analysis for LambdaUrlCreator
+        uses: github/codeql-action/analyze@v2
+
+      - name: Build LambdaUrlRedirector project
+        run: |
+          cd LambdaUrlRedirector
+          mvn clean install
+          ls -al target  # Verifica se o arquivo .jar foi gerado
+
+      - name: Initialize CodeQL for LambdaUrlRedirector
+        uses: github/codeql-action/init@v2
+        with:
+          languages: java
+          target: LambdaUrlRedirector
+
+      - name: Perform CodeQL Analysis for LambdaUrlRedirector
         uses: github/codeql-action/analyze@v2
