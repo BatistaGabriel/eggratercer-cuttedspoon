@@ -32,6 +32,14 @@ jobs:
             ${{ runner.os }}-maven-
             ${{ runner.os }}-maven-*
 
+      - name: Cache Dependency-Check Data
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository/org/owasp/dependency-check
+          key: ${{ runner.os }}-dependency-check-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-dependency-check-
+
       - name: Dependency-Check for LambdaUrlCreator
         run: |
           cd LambdaUrlCreator
