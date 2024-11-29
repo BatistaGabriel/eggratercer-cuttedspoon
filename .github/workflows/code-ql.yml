@@ -22,8 +22,24 @@ jobs:
           distribution: "temurin"
           java-version: 17
 
-      - name: Build the project (Maven)
-        run: mvn clean install
+      - name: Cache Maven dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+            ${{ runner.os }}-maven-*
+
+      - name: Build the project (LambdaUrlCreator)
+        run: |
+          cd LambdaUrlCreator
+          mvn clean install
+
+      - name: Build the project (LambdaUrlRedirector)
+        run: |
+          cd LambdaUrlRedirector
+          mvn clean install
 
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v2
