@@ -35,20 +35,22 @@ jobs:
         run: |
           cd LambdaUrlCreator
           mvn clean package
+          ls -l target  # Adicione esta linha para listar os arquivos gerados
 
       - name: Build LambdaUrlRedirector Artifacts
         run: |
           cd LambdaUrlRedirector
           mvn clean package
+          ls -l target  # Adicione esta linha para listar os arquivos gerados
 
       - name: Upload LambdaUrlCreator Artifact
         uses: actions/upload-artifact@v3
         with:
           name: LambdaUrlCreator-jar
-          path: LambdaUrlCreator/target/*-shaded.jar
+          path: LambdaUrlCreator/target/*.jar
 
       - name: Upload LambdaUrlRedirector Artifact
         uses: actions/upload-artifact@v3
         with:
           name: LambdaUrlRedirector-jar
-          path: LambdaUrlRedirector/target/*-shaded.jar
+          path: LambdaUrlRedirector/target/*.jar
