@@ -43,7 +43,7 @@ jobs:
       - name: Dependency-Check for LambdaUrlCreator
         run: |
           cd LambdaUrlCreator
-          mvn org.owasp:dependency-check-maven:check
+          mvn org.owasp:dependency-check-maven:check -DdisableNVDUpdate=true
         env:
           MAVEN_OPTS: "-Xmx1024m"
 
@@ -56,7 +56,7 @@ jobs:
       - name: Dependency-Check for LambdaUrlRedirector
         run: |
           cd LambdaUrlRedirector
-          mvn org.owasp:dependency-check-maven:check
+          mvn org.owasp:dependency-check-maven:check -DdisableNVDUpdate=true
         env:
           MAVEN_OPTS: "-Xmx1024m"
 
