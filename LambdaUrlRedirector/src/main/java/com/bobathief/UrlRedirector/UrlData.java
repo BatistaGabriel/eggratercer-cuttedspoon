@@ -10,13 +10,14 @@ import lombok.Setter;
 @Setter
 @Getter
 public class UrlData {
-    /**
-    * Url that will be shortened.
-    */
-    private String originalUrl;
 
-    /**
-    * Expiration data for the url.
-    */
-    private long expirationDate;
+  /**
+   * Url that will be shortened.
+   */
+  private String originalUrl;
+
+  /**
+   * Expiration data for the url.
+   */
+  private long expirationDate;
 }

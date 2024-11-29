@@ -6,80 +6,90 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.regex.Pattern;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
-public final class Main implements RequestHandler<
-    Map<String, Object>,
-    Map<String, String>> {
-    /**
-    * ObjectMapper instance.
-    */
-    private final ObjectMapper objectMapper = new ObjectMapper();
+public final class Main
+  implements RequestHandler<Map<String, Object>, Map<String, String>> {
 
-    /**
-    * S3Client instance.
-    */
-    private final S3Client s3Client = S3Client.builder().build();
+  private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+  private static final S3Client S3_CLIENT = S3Client.builder().build();
+  private static final int MAX_URL_CODE_SIZE = 8;
+  private static final String BUCKET_NAME = "siamang-nihonium";
+  private static final Pattern NUMERIC_PATTERN = Pattern.compile("\\d+");
 
-    /**
-    * Defines the max size of the url code.
-    */
-    private static final int MAX_URL_CODE_SIZE = 8;
+  @Override
+  public Map<String, String> handleRequest(
+    final Map<String, Object> input,
+    final Context context
+  ) {
+    String body = (String) input.get("body");
 
-    @Override
-    public Map<String, String> handleRequest(
-        final Map<String, Object> input,
-        final Context context
-    ) {
-        String body = input.get("body").toString();
+    Map<String, String> bodyMap = parseRequestBody(body);
+    validateBodyMap(bodyMap);
 
-        Map<String, String> bodyMap;
-        try {
-            bodyMap = objectMapper.readValue(body, Map.class);
-        } catch (Exception exception) {
-            throw new RuntimeException(
-            String.format(
-                "Error parsing JSON body: %s",
-                exception.getMessage()
-            ),
-            exception
-            );
-        }
+    String originalUrl = bodyMap.get("originalUrl");
+    long expirationTimeInSeconds = parseExpirationTime(bodyMap.get("expirationTime"));
+    String shortUrlCode = generateShortUrlCode();
 
-        String originalUrl = bodyMap.get("originalUrl");
-        String expirationTime = bodyMap.get("expirationTime");
-        long expirationTimeInSeconds = Long.parseLong(expirationTime);
-        String shortUrlCode = UUID.randomUUID()
-                .toString()
-                .substring(0, MAX_URL_CODE_SIZE);
+    UrlData urlData = new UrlData(originalUrl, expirationTimeInSeconds);
+    saveUrlDataToS3(shortUrlCode, urlData);
 
-        UrlData urlData = new UrlData(originalUrl, expirationTimeInSeconds);
+    return createResponse(shortUrlCode);
+  }
 
-        try {
-            String urlDataJson = objectMapper.writeValueAsString(urlData);
-
-            PutObjectRequest request = PutObjectRequest
-            .builder()
-            .bucket("siamang-nihonium")
-            .key(String.format("%s.json", shortUrlCode))
-            .build();
-
-            s3Client.putObject(request, RequestBody.fromString(urlDataJson));
-        } catch (Exception exception) {
-            throw new RuntimeException(
-            String.format(
-                "Error saving data to S3: %s",
-                exception.getMessage()
-            ),
-            exception
-            );
-        }
-
-        Map<String, String> response = new HashMap<>();
-        response.put("urlCode", shortUrlCode);
-
-        return response;
+  private Map<String, String> parseRequestBody(String body) {
+    try {
+      return OBJECT_MAPPER.readValue(body, Map.class);
+    } catch (Exception exception) {
+      throw new RuntimeException(
+        "Error parsing JSON body: " + exception.getMessage(),
+        exception
+      );
     }
+  }
+
+  private void validateBodyMap(Map<String, String> bodyMap) {
+    if (bodyMap.get("originalUrl") == null || bodyMap.get("expirationTime") == null) {
+      throw new RuntimeException(
+        "Missing required fields: originalUrl or expirationTime."
+      );
+    }
+  }
+
+  private long parseExpirationTime(String expirationTime) {
+    if (expirationTime == null || !NUMERIC_PATTERN.matcher(expirationTime).matches()) {
+      throw new RuntimeException("Invalid expiration time format.");
+    }
+    return Long.parseLong(expirationTime);
+  }
+
+  private String generateShortUrlCode() {
+    return UUID.randomUUID().toString().substring(0, MAX_URL_CODE_SIZE);
+  }
+
+  private void saveUrlDataToS3(String shortUrlCode, UrlData urlData) {
+    try {
+      String urlDataJson = OBJECT_MAPPER.writeValueAsString(urlData);
+      PutObjectRequest request = PutObjectRequest
+        .builder()
+        .bucket(BUCKET_NAME)
+        .key(shortUrlCode + ".json")
+        .build();
+      S3_CLIENT.putObject(request, RequestBody.fromString(urlDataJson));
+    } catch (Exception exception) {
+      throw new RuntimeException(
+        "Error saving data to S3: " + exception.getMessage(),
+        exception
+      );
+    }
+  }
+
+  private Map<String, String> createResponse(String shortUrlCode) {
+    Map<String, String> response = new HashMap<>();
+    response.put("urlCode", shortUrlCode);
+    return response;
+  }
 }
