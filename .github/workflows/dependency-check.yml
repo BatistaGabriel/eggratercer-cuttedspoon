@@ -27,18 +27,32 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.m2/repository
-          key: ${{runner.os}}-maven-${{hashFiles('**/pom.xml')}}
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
-            ${{runner.os}}-maven-
+            ${{ runner.os }}-maven-
 
-      - name: Install OWASP Dependency-Check
+      - name: Dependency-Check for LambdaUrlCreator
         run: |
-          curl -s https://get.sdkman.io | bash
-          source "$HOME/.sdkman/bin/sdkman-init.sh" && sdk install maven
+          cd LambdaUrlCreator
           mvn org.owasp:dependency-check-maven:check
+        env:
+          MAVEN_OPTS: "-Xmx1024m"
 
-      - name: Upload Report as Artifact
+      - name: Upload Report for LambdaUrlCreator
         uses: actions/upload-artifact@v3
         with:
-          name: dependency-check-report
-          path: target/dependency-check-report.html
+          name: dependency-check-report-lambdaurlcreator
+          path: LambdaUrlCreator/target/dependency-check-report.html
+
+      - name: Dependency-Check for LambdaUrlRedirector
+        run: |
+          cd LambdaUrlRedirector
+          mvn org.owasp:dependency-check-maven:check
+        env:
+          MAVEN_OPTS: "-Xmx1024m"
+
+      - name: Upload Report for LambdaUrlRedirector
+        uses: actions/upload-artifact@v3
+        with:
+          name: dependency-check-report-lambdaurlredirector
+          path: LambdaUrlRedirector/target/dependency-check-report.html
