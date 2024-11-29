@@ -27,6 +27,7 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
+            ${{ runner.os }}-maven-*
 
       - name: Dependency-Check for LambdaUrlCreator
         run: |
