@@ -45,4 +45,6 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: app-jar
-          path: target/*.jar
+          path: |
+            LambdaUrlCreator/target/*.jar
+            LambdaUrlRedirector/target/*-shaded.jar
