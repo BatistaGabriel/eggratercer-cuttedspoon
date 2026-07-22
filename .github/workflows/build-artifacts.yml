@@ -44,13 +44,13 @@ jobs:
           ls -l target  # Adicione esta linha para listar os arquivos gerados
 
       - name: Upload LambdaUrlCreator Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: LambdaUrlCreator-jar
           path: LambdaUrlCreator/target/*.jar
 
       - name: Upload LambdaUrlRedirector Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: LambdaUrlRedirector-jar
           path: LambdaUrlRedirector/target/*.jar
